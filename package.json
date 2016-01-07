@@ -2,7 +2,7 @@
   "name": "diving-squirrel",
   "description": "Framework for simple web app. It uses express server and jade template system.",
   "author": "Lukas Macuda <lukas.macuda@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "express": "^4.13.3",
     "compression": "^1.5.2",
@@ -12,12 +12,6 @@
     "body-parser": "^1.13.3",
     "coffee-script": "^1.10.0",
     "uglify-js": "^2.4.24"
-  },
-  "devDepndencies": {
-    "mysql": "^2.9.0",
-    "md5": "^2.0.0",
-    "cson-config": "^0.1.12",
-    "coffee-convert": "^0.1.0"
   },
   "repository": {
     "type": "git",

@@ -12,9 +12,6 @@ logger = require "../logger"
 __root = path.dirname require.main.filename
 __rootRelative = path.relative __dirname, __root
 
-console.log __root
-console.log __dirname
-
 __options = 
 	port: 8080
 	views: "./views"
@@ -88,6 +85,7 @@ module.exports = class App
 	constructor: (options = {}) ->
 		return __error "App already instantiated" unless __instance is null
 		__instance = @
+		App.instance = __instance
 		@options = {}
 		@options[k] = v for k, v of __options
 		@options[k] = v for k, v of options

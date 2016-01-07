@@ -76,7 +76,7 @@ Page.Route = class Route
 			callback = method
 			method = "get"
 		@route = _getLink route
-		@method = method
+		@method = method.toLowerCase()
 		@callback = callback
 
 Page.JsonResponse = class JsonResponse

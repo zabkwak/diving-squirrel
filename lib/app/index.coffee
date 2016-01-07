@@ -135,3 +135,5 @@ module.exports = class App
 			logger.warn "Warnings: #{__info.warn}" if __info.warn > 0
 			logger.error "Errors: #{__info.error}" if __info.error > 0
 		, 50
+
+App.instance = __instance

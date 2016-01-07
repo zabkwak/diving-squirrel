@@ -26,7 +26,8 @@
   "keywords": [
     "express",
     "jade",
-    "framework"
+    "framework",
+    "coffeescript"
   ],
   "license": "MIT"
 }

@@ -85,6 +85,7 @@ module.exports = class App
 	constructor: (options = {}) ->
 		return __error "App already instantiated" unless __instance is null
 		__instance = @
+		@server = null
 		App.instance = __instance
 		@options = {}
 		@options[k] = v for k, v of __options
@@ -112,7 +113,7 @@ module.exports = class App
 		@app.head route, callback
 	delete: (route, callback) ->
 		@app.delete route, callback
-	start: ->
+	start: (cb) ->
 		return __error "Application already started" if @started
 		@started = yes
 		interval = setInterval =>
@@ -128,10 +129,11 @@ module.exports = class App
 				body = "" if req.method in ["GET", "HEAD"]
 				logger.error "#{res.statusCode} #{req.method} #{req.url} #{body}- #{req.headers["x-forwarded-for"] or req.connection.remoteAddress} - #{err}"
 				new Pages.Error(@, err).render res
-			@app.listen @options.port
+			@server = @app.listen @options.port
 			logger.log "Listening on #{@options.port}"
 			logger.warn "Warnings: #{__info.warn}" if __info.warn > 0
 			logger.error "Errors: #{__info.error}" if __info.error > 0
+			cb?()
 		, 50
 
 App.instance = __instance

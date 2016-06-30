@@ -27,7 +27,7 @@ This usage will create the app with default options.
 **baseUrl** URL for creating links in the app. Default: ""  
 **styles** List of styles for entire project. Default: []  
 **scripts** List of scripts for entire project. Default: []  
-**prodcution** Flag for production environment. Default: false  
+**production** Flag for production environment. Default: false  
 **onLoggedUser: (identificator, callback)** Function called in the middleware for checking if user is logged. Identificator is signed cookie with key *u*.Callback has two parameters. Error and user data from the onLoggedUser method. If cookie doesn't exist function is skipped. Default: Function just pass empty object to the callback  
 
 ## Templates
@@ -39,6 +39,8 @@ Variables passed to the layout.jade:
 **scripts** List of scripts loaded in the layout. It's taken from the *options.scripts*.  
 **user** Logged user.  
 **content** Content of the route template.  
+
+Templates for individual page routes must be in *options.views* directory and in directory named by the Page class name lowercased.
 
 ## Creating page
 ```coffeescript
@@ -58,6 +60,7 @@ module.exports = class Home extends Page
 		]
 
 ```
+In this example home.jade must be in directory [options.views]/home => [options.views]/home/home.jade.
 
 ## Template functions
 Functions are passed to all templates in *f* variable.  
@@ -222,7 +225,8 @@ constructor: (data)
 ###
 Creates link from the *options.baseUrl*, route and adds params to the url query.
 @param route 
-@param params
+@param params Query string parameters
+@return string Ling by parameters
 ###
 Page.link: (route = "", params = {})
 ```

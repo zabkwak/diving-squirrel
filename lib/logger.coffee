@@ -8,7 +8,7 @@ module.exports =
 		else
 			console.warn "#{new Date()} #{message}"
 	error: (message) ->
-		if colors
+		if @colors
 			console.error "\x1b[31m#{new Date()} #{message}\x1b[0m"
 		else
 			console.error "#{new Date()} #{message}"

@@ -19,6 +19,7 @@ module.exports = class Page
 	requireLogin: -> no
 	getStyles: -> []
 	getScripts: -> []
+	getLayoutVariables: -> {}
 	register: ->
 		async.each @getRoutes(), (route, callback) =>
 			unless route instanceof Page.Route
@@ -51,13 +52,15 @@ module.exports = class Page
 		return res.render templatePath, _getVariables response.data unless fs.existsSync "#{@app.options.views}/layout.jade"
 		try
 			content = @compileTemplate templatePath, _getVariables response.data
-			res.render "layout", _getVariables
+			vars = 
 				title: "#{response.title} | #{@app.options.name}"
 				name: @app.options.name
 				user: @user
 				content: content
 				styles: @app.options.styles.concat @getStyles(), response.styles
 				scripts: @app.options.scripts.concat @getScripts(), response.scripts
+			vars[k] = v for k, v of @getLayoutVariables()
+			res.render "layout", _getVariables vars
 		catch e 
 			console.error e
 			res.send404()

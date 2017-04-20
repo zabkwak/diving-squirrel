@@ -128,7 +128,9 @@ module.exports = class App
 				body = "#{JSON.stringify req.body} "
 				body = "" if req.method in ["GET", "HEAD"]
 				logger.error "#{res.statusCode} #{req.method} #{req.url} #{body}- #{req.headers["x-forwarded-for"] or req.connection.remoteAddress} - #{err}"
-				new Pages.Error(@, err).render res
+				e = new Pages.Error @, err
+				e.beforeAction req
+				e.render res
 			@server = @app.listen @options.port
 			logger.log "Listening on #{@options.port}"
 			logger.warn "Warnings: #{__info.warn}" if __info.warn > 0

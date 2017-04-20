@@ -2,7 +2,7 @@
   "name": "diving-squirrel",
   "description": "Framework for simple web app. It uses express server and jade template system.",
   "author": "Lukas Macuda <lukas.macuda@gmail.com>",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "dependencies": {
     "express": "^4.13.3",
     "compression": "^1.5.2",

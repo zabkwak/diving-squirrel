@@ -1,6 +1,6 @@
 # Diving Squirrel
 
-Simple node.js framework for easy preparation of web sites using [express](https://www.npmjs.com/package/express) and [jade](https://www.npmjs.com/package/jade). 
+Simple node.js framework for easy preparation of web sites using [express](https://www.npmjs.com/package/express) and [pug](https://www.npmjs.com/package/pug). 
 It's written in [CoffeeScript](http://coffeescript.org/).
 
 ## Installation
@@ -19,7 +19,7 @@ This usage will create the app with default options.
 
 ### Options
 **port** Port where the app listens. Default: 8080  
-**views** Base directory of jade templates. Default: ./views  
+**views** Base directory of pug templates. Default: ./views  
 **cookieSecret** Secret for signing cookies. You should set it. Default: \_\_cookieSecret\_\_  
 **static** Directory for express static files. Default: ./public  
 **pages** Directory for page classes. Default: ./pages  
@@ -31,8 +31,8 @@ This usage will create the app with default options.
 **onLoggedUser: (identificator, callback)** Function called in the middleware for checking if user is logged. Identificator is signed cookie with key *u*.Callback has two parameters. Error and user data from the onLoggedUser method. If cookie doesn't exist function is skipped. Default: Function just pass empty object to the callback  
 
 ## Templates
-If you will use HTML responses, you should create layout.jade in the *options.views* directory. If the file doesn't exist template of the route is used.  
-Variables passed to the layout.jade:  
+If you will use HTML responses, you should create layout.pug in the *options.views* directory. If the file doesn't exist template of the route is used.  
+Variables passed to the layout.pug:  
 **title** Title of the page created from the name of the page and name of the application.  
 **name** Application name.  
 **styles** List of styles loaded in the layout. It's taken from the *options.styles*.   
@@ -60,7 +60,7 @@ module.exports = class Home extends Page
 		]
 
 ```
-In this example home.jade must be in directory [options.views]/home => [options.views]/home/home.jade.
+In this example home.pug must be in directory [options.views]/home => [options.views]/home/home.pug.
 
 ## Template functions
 Functions are passed to all templates in *f* variable.  
@@ -138,7 +138,7 @@ Default response if none of page responses is passed in render function.
 ###
 getResponse: ()
 ###
-Checks if the page uses layout.jade.
+Checks if the page uses layout.pug.
 @return bool
 ###
 useLayout: ()
@@ -172,7 +172,7 @@ Registers the page's routes to the app.
 ###
 register: ()
 ###
-Compiles the jade template to the html string.
+Compiles the pug template to the html string.
 @param path Relative path to the template from the *options.views* directory.
 @param data Data to pass to the template.
 @return string
@@ -202,7 +202,7 @@ constructor: (route, method = "get", callback = null)
 ```coffeescript
 ###
 Creates HTML response. The data are passed to the template. The template is rendered.
-@param template Relative path to the jade template in the views directory.
+@param template Relative path to the pug template in the views directory.
 @param title Title of the page.
 @param data Data passed to the template.
 @param styles List of styles added to the route.

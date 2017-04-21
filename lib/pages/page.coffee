@@ -1,4 +1,4 @@
-jade = require "jade"
+pug = require "pug"
 async = require "async"
 qs = require "querystring"
 url = require "url"
@@ -41,7 +41,7 @@ module.exports = class Page
 			callback()
 
 	compileTemplate: (path, data = {}) ->
-		(jade.compileFile "#{@app.options.views}/#{path}.jade") _getVariables data
+		(pug.compileFile "#{@app.options.views}/#{path}.pug") _getVariables data
 
 	render: (res, response) ->
 		response = @getResponse() unless response
@@ -49,7 +49,7 @@ module.exports = class Page
 		if @constructor.name.toLowerCase() is "error"
 			templatePath =  (Path.relative @app.options.views, "#{__dirname}/../views") + "/error"
 		return res.render templatePath, _getVariables response.data unless @useLayout()
-		return res.render templatePath, _getVariables response.data unless fs.existsSync "#{@app.options.views}/layout.jade"
+		return res.render templatePath, _getVariables response.data unless fs.existsSync "#{@app.options.views}/layout.pug"
 		try
 			content = @compileTemplate templatePath, _getVariables response.data
 			vars = 

@@ -1,6 +1,6 @@
 express = require "express"
 compression = require "compression"
-jade = require "jade"
+pug = require "pug"
 cookieParser = require "cookie-parser"
 bodyParser = require "body-parser"
 fs = require "fs"
@@ -44,7 +44,7 @@ __createExpressApp = (instance) ->
 	app = express()
 
 	app.set "views", instance.options.views
-	app.set "view engine", "jade"
+	app.set "view engine", "pug"
 	app.use cookieParser instance.options.cookieSecret
 	app.use express.static instance.options.static
 	app.use compression()
@@ -91,7 +91,7 @@ module.exports = class App
 		@options[k] = v for k, v of __options
 		@options[k] = v for k, v of options
 		__warn "CookieSecret is default. You should change it." if @options.cookieSecret is __options.cookieSecret
-		__warn "File 'layout.jade' not found in #{@options.views}. Layout of the route will be rendered in HTMLResponse." unless fs.existsSync "#{@options.views}/layout.jade"
+		__warn "File 'layout.pug' not found in #{@options.views}. Layout of the route will be rendered in HTMLResponse." unless fs.existsSync "#{@options.views}/layout.pug"
 		__createExpressApp @
 
 		@name = @options.name
